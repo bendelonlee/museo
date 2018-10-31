@@ -178,4 +178,14 @@ class CuratorTest < Minitest::Test
     assert_equal 0, actual.size
   end
 
+  def test_load_photographs
+    @curator.load_photographs('./data/photographs.csv')
+    assert_equal 4, @curator.photographs.size
+  end
+
+  def test_load_artists
+    @curator.load_artists('./data/artists.csv')
+    assert_equal 6, @curator.artists.size
+  end
+
 end

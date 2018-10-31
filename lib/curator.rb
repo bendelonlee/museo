@@ -1,5 +1,6 @@
 require './lib/artist'
 require './lib/photograph'
+require './lib/file_io'
 
 class Curator
   attr_reader :photographs, :artists
@@ -40,5 +41,13 @@ class Curator
   def photographs_taken_by_artists_from(country)
     artists = @artists.find_all { |artist| artist.country == country }
     find_photographs_by_artists(artists)
+  end
+
+  def load_photographs(file)
+    @photographs += FileIO.load_photographs(file)
+  end
+
+  def load_artists(file)
+    @artists += FileIO.load_artists(file)
   end
 end
