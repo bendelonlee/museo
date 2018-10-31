@@ -158,6 +158,14 @@ class CuratorTest < Minitest::Test
     assert_equal '3', actual[0].artist_id
 
   end
+
+  def test_find_artists_with_multiple_photographs
+    setup_artists_and_photos
+    diane_arbus = @curator.find_artist_by_id("3")
+    actual = curator.artists_with_multiple_photographs
+    assert_equal 1, actual.size
+    assert_equal '3', actual[0].artist_id
+  end
   #
   #
   # curator.artists_with_multiple_photographs
