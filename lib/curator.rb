@@ -60,4 +60,9 @@ class Curator
       @artists << Artist.new(artist_hash)
     end
   end
+
+  def test_artists_photographs_by_age
+    expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
+  end
 end
