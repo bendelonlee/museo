@@ -5,6 +5,12 @@ class CuratorTest < Minitest::Test
   def setup
     @curator = Curator.new({})
   end
+
+  def setup_artists_photos_from_files
+    @curator.load_photographs('./data/photographs.csv')
+    @curator.load_artists('./data/artists.csv')
+  end
+
   def setup_artists_and_photos
     @photo_1 = {
       id: "1",
@@ -186,6 +192,12 @@ class CuratorTest < Minitest::Test
   def test_load_artists
     @curator.load_artists('./data/artists.csv')
     assert_equal 6, @curator.artists.size
+  end
+
+  def test_photographs_taken_between
+    setup_artists_photos_from_files
+    actual = @curator.photographs_taken_between(1950..1965)
+    assert_equal 2, actual.size
   end
 
 end
