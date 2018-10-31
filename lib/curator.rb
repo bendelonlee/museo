@@ -30,4 +30,15 @@ class Curator
       find_photographs_by_artist(artist).size > 1
     end
   end
+
+  def find_photographs_by_artists(artists)
+    artists.reduce([]) do |result, artist|
+      result += find_photographs_by_artist(artist)
+    end
+  end
+
+  def photographs_taken_by_artists_from(country)
+    artists = @artists.find_all { |artist| artist.country == country }
+    find_photographs_by_artists(artists)
+  end
 end
