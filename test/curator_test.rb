@@ -193,11 +193,16 @@ class CuratorTest < Minitest::Test
     @curator.load_artists('./data/artists.csv')
     assert_equal 6, @curator.artists.size
   end
-  
+
   def test_photographs_taken_between
     setup_artists_photos_from_files
     actual = @curator.photographs_taken_between(1950..1965)
     assert_equal 2, actual.size
+  end
+
+  def test_artists_photographs_by_age
+    expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
   end
 
 end
