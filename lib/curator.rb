@@ -49,6 +49,14 @@ class Curator
     end
   end
 
+  def artists_photographs_by_age(artist)
+
+    find_photographs_by_artist(artist).reduce({}) do |result, photograph|
+      result[artist.age_in(photograph.year)] = photograph.name
+      result
+    end
+  end
+
   def load_photographs(file)
     FileIO.load_photographs(file).each do |photograph_hash|
       @photographs << Photograph.new(photograph_hash)
