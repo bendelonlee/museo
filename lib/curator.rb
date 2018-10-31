@@ -43,11 +43,21 @@ class Curator
     find_photographs_by_artists(artists)
   end
 
+  def photographs_taken_between(range)
+    @photographs.find_all do |photograph|
+      photograph.year.to_i.between?(range.min, range.max)
+    end
+  end
+
   def load_photographs(file)
-    @photographs += FileIO.load_photographs(file)
+    FileIO.load_photographs(file).each do |photograph_hash|
+      @photographs << Photograph.new(photograph_hash)
+    end
   end
 
   def load_artists(file)
-    @artists += FileIO.load_artists(file)
+    FileIO.load_artists(file).each do |artist_hash|
+      @artists << Artist.new(artist_hash)
+    end
   end
 end
