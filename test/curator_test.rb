@@ -165,22 +165,17 @@ class CuratorTest < Minitest::Test
     assert_equal 1, actual.size
     assert_equal '3', actual[0].id
   end
-  #
-  #
-  # curator.artists_with_multiple_photographs
-  # #=> [#<Artist:0x00007fa3c13eef88 @born="1923", @country="United States", @died="1971", @id="3", @name="Diane Arbus">]
-  #
-  # curator.artists_with_multiple_photographs.length
-  # #=> 1
-  #
-  # diane_arbus == curator.artists_with_multiple_photographs.first
-  # #=> true
-  #
-  # curator.photographs_taken_by_artists_from("United States")
-  # #=> [#<Photograph:0x00007fa3c286b088...>, #<Photograph:0x00007fa3c13a4050...>, #<Photograph:0x00007fa3c110e4a8...>]
-  #
-  # curator.photographs_taken_by_artists_from("Argentina")
-  # #=> []
-  # ```
+
+  def test_photographs_taken_by_artists_from
+    setup_artists_and_photos
+    actual = @curator.photographs_taken_by_artists_from("United States")
+    assert_equal 3, actual.size
+  end
+
+  def test_photographs_taken_by_artists_from_returns_empty_when_no_artists_from_that_place
+    setup_artists_and_photos
+    actual = @curator.photographs_taken_by_artists_from("Argentina")
+    assert_equal 0, actual.size
+  end
 
 end
