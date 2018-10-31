@@ -57,19 +57,19 @@ class CuratorTest < Minitest::Test
       died: "1971",
       country: "United States"
     }
-    @curator.add_photograph(photo_1)
+    @curator.add_photograph(@photo_1)
 
-    @curator.add_photograph(photo_2)
+    @curator.add_photograph(@photo_2)
 
-    @curator.add_photograph(photo_3)
+    @curator.add_photograph(@photo_3)
 
-    @curator.add_photograph(photo_4)
+    @curator.add_photograph(@photo_4)
 
-    @curator.add_artist(artist_1)
+    @curator.add_artist(@artist_1)
 
-    @curator.add_artist(artist_2)
+    @curator.add_artist(@artist_2)
 
-    @curator.add_artist(artist_3)
+    @curator.add_artist(@artist_3)
   end
 
   def test_it_exists
@@ -151,10 +151,11 @@ class CuratorTest < Minitest::Test
   end
 
   def test_find_photographs_by_artist
+    setup_artists_and_photos
     diane_arbus = @curator.find_artist_by_id("3")
-    acutal @curator.find_photographs_by_artist(diane_arbus)
+    actual = @curator.find_photographs_by_artist(diane_arbus)
     assert_equal 2, actual.size
-    assert_equal 3, actual[0].artist_id
+    assert_equal '3', actual[0].artist_id
 
   end
   #
